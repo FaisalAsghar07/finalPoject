@@ -113,10 +113,7 @@ class ordersController extends AppBaseController
             return redirect(route('orders.index'));
         }
 
-        $customers = customer::get();
-        $drivers = driver::get();
-        $pizzas = pizza::get();
-        return view('orders.edit',compact("customers","drivers","pizzas","orders"));
+        
     }
 
     /**
