@@ -6,6 +6,9 @@ use App\Http\Requests\CreateordersRequest;
 use App\Http\Requests\UpdateordersRequest;
 use App\Repositories\ordersRepository;
 use App\Http\Controllers\AppBaseController;
+use App\Models\customer;
+use App\Models\driver;
+use App\Models\pizza;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
@@ -42,7 +45,10 @@ class ordersController extends AppBaseController
      */
     public function create()
     {
-        return view('orders.create');
+        $customers = customer::get();
+        $drivers = driver::get();
+        $pizzas = pizza::get();
+        return view('orders.create',compact("customers","drivers","pizzas"));
     }
 
     /**
@@ -55,8 +61,15 @@ class ordersController extends AppBaseController
     public function store(CreateordersRequest $request)
     {
         $input = $request->all();
-
+        $pizza = Pizza::find($request->pizza_id);
+        $input['total'] = $pizza->price;
         $orders = $this->ordersRepository->create($input);
+        $driver = driver::find($request->driver_id);
+        $driver->order_id = $orders->id;
+        $driver->save();
+        $customer = customer::find($request->customer_id);
+        $customer->order_id = $orders->id;
+        $customer->save();
 
         Flash::success('Orders saved successfully.');
 
@@ -80,7 +93,7 @@ class ordersController extends AppBaseController
             return redirect(route('orders.index'));
         }
 
-        return view('orders.show')->with('orders', $orders);
+        return view('orders.invoice')->with('orders', $orders);
     }
 
     /**
@@ -100,7 +113,10 @@ class ordersController extends AppBaseController
             return redirect(route('orders.index'));
         }
 
-        return view('orders.edit')->with('orders', $orders);
+        $customers = customer::get();
+        $drivers = driver::get();
+        $pizzas = pizza::get();
+        return view('orders.edit',compact("customers","drivers","pizzas","orders"));
     }
 
     /**

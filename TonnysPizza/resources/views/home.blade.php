@@ -18,7 +18,7 @@
         <div class="col-md-3">
             <div>
                 <h5>Total Earning</h5>
-                <p>{{ number_format($orders->sum('total'), 2) }} USD</p>
+                <p>{{ number_format($orders->sum('total'), 2) }} £</p>
                 <a href="{{ url('/orders') }}">Visit Orders</a>
             </div>
         </div>

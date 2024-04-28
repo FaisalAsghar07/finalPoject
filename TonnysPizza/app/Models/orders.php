@@ -24,7 +24,7 @@ class orders extends Model
     use HasFactory;
 
     public $table = 'orders';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -37,6 +37,7 @@ class orders extends Model
         'customer_id',
         'pizza_id',
         'driver_id',
+        'total',
         'order_date',
         'delivery_date'
     ];
@@ -55,6 +56,15 @@ class orders extends Model
         'delivery_date' => 'datetime'
     ];
 
+    public function driver(){
+        return $this->belongsTo(driver::class,"driver_id");
+    }
+    public function customer(){
+        return $this->belongsTo(customer::class,"customer_id");
+    }
+    public function pizza(){
+        return $this->belongsTo(pizza::class,"pizza_id");
+    }
     /**
      * Validation rules
      *
@@ -68,5 +78,5 @@ class orders extends Model
         'delivery_date' => 'nullable'
     ];
 
-    
+
 }
