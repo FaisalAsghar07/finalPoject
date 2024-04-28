@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,12 +14,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+  //  return view('welcome');
+//});
 
+
+// Route::view('/', 'welcome');
 
 Route::resource('customers', App\Http\Controllers\customerController::class);
 
 
 Route::resource('pizzas', App\Http\Controllers\pizzaController::class);
+
+
+Route::resource('members', App\Http\Controllers\memberController::class);
+
+
+Route::resource('drivers', App\Http\Controllers\driverController::class);
+
+
+Route::resource('orders', App\Http\Controllers\ordersController::class);
+
+
+Route::get("/",[HomeController::class,"index"]);
+
+

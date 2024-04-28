@@ -6,6 +6,7 @@ use App\Http\Requests\CreatecustomerRequest;
 use App\Http\Requests\UpdatecustomerRequest;
 use App\Repositories\customerRepository;
 use App\Http\Controllers\AppBaseController;
+use App\Models\customer;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
@@ -56,7 +57,7 @@ class customerController extends AppBaseController
     {
         $input = $request->all();
 
-        $customer = $this->customerRepository->create($input);
+        $customer = customer::create($input);
 
         Flash::success('Customer saved successfully.');
 
