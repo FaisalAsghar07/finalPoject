@@ -50,19 +50,5 @@
 </div>
 
 @push('js_scripts')
-    <script type="text/javascript">
-    // $(document).ready(function () {
-
-    //     $('#delivery_date').datetimepicker({
-    //         format: 'YYYY-MM-DD HH:mm:ss',
-    //         useCurrent: true,
-    //         sideBySide: true
-    //     })
-    //     $('#order_date').datetimepicker({
-    //         format: 'YYYY-MM-DD HH:mm:ss',
-    //         useCurrent: true,
-    //         sideBySide: true
-    //     })
-    // });
-    </script>
+    
 @endpush

@@ -22,7 +22,7 @@ class driver extends Model
     use HasFactory;
 
     public $table = 'driver';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -60,5 +60,9 @@ class driver extends Model
         'order_id' => 'nullable|integer'
     ];
 
-    
+    public function order(){
+        return $this->belongsTo(orders::class,'order_id');
+    }
+
+
 }
